@@ -3,10 +3,8 @@
         <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand d-flex align-items-center">
             <img src="{{ url_for('views.themes', path='img/iste_logo.png') }}" height="50" class="mr-3" alt="ISTE"
                 style="max-height: 50px;">
-            {% if Configs.ctf_logo %}
-            <img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=Configs.ctf_logo) }}" height="40"
-                alt="{{ Configs.ctf_name }}">
-            {% else %}
+            <!-- Just the text if logo exists elsewhere or user wants clean look -->
+            {% if not Configs.ctf_logo %}
             {{ Configs.ctf_name }}
             {% endif %}
         </a>
@@ -16,10 +14,10 @@
         </button>
         <div class="collapse navbar-collapse" id="base-navbars">
             <!-- Center: Colloquium Logo -->
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto text-center" style="flex: 1; justify-content: center;">
                 <li class="nav-item">
-                    <img src="{{ url_for('views.themes', path='img/colloquium-banner.png') }}" height="60"
-                        alt="Colloquium" style="max-height: 60px; object-fit: contain;">
+                    <img src="{{ url_for('views.themes', path='img/colloquium-banner.png') }}" height="50"
+                        alt="Colloquium" style="max-height: 50px; width: auto; object-fit: contain;">
                 </li>
             </ul>
 
