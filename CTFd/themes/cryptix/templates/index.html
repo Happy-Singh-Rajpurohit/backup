@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+<style>
+    .hero-custom {
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .hero-logo {
+        max-width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .event-flags {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+    }
+
+    .flag-item {
+        text-align: center;
+        color: #45a29e;
+    }
+
+    .flag-icon {
+        font-size: 3rem;
+        color: #66fcf1;
+        margin-bottom: 10px;
+    }
+
+    .social-links {
+        margin-top: 40px;
+    }
+
+    .social-icon {
+        font-size: 2rem;
+        color: #45a29e;
+        margin: 0 15px;
+        transition: color 0.3s;
+    }
+
+    .social-icon:hover {
+        color: #66fcf1;
+    }
+
+    .exclusive-badge {
+        background-color: #1f2833;
+        border: 1px solid #66fcf1;
+        color: #66fcf1;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container hero-custom">
+        <div class="exclusive-badge">Use code CRX24</div>
+        <h1 class="display-3">
+            {% if Configs.ctf_name %}
+            {{ Configs.ctf_name }}
+            {% else %}
+            CTFd
+            {% endif %}
+        </h1>
+        <p class="lead">
+            Exclusive Event for <strong>ISTE</strong> & <strong>Cryptix</strong>
+        </p>
+
+        <div class="event-flags">
+            <div class="flag-item">
+                <div class="flag-icon"><i class="fas fa-flag"></i></div>
+                <h3>Capture</h3>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Defend</h3>
+            </div>
+            <div class="flag-item">
+                <div class="flag-icon"><i class="fas fa-code"></i></div>
+                <h3>Dominate</h3>
+            </div>
+        </div>
+
+        <div>
+            {% if confirm_email %}
+            <div class="alert alert-info" role="alert">
+                Please check your email inbox to confirm your email address.
+            </div>
+            {% endif %}
+
+            {% if not authed() %}
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg px-5">
+                Register Now
+            </a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-5">
+                Login
+            </a>
+            {% else %}
+            <a href="{{ url_for('challenges.listing') }}" class="btn btn-primary btn-lg px-5">
+                View Challenges
+            </a>
+            <a href="{{ url_for('scoreboard.listing') }}" class="btn btn-outline-secondary btn-lg px-5">
+                Scoreboard
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% if Configs.ctf_description %}
+            <div class="content-box text-center">
+                {{ Configs.ctf_description | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
